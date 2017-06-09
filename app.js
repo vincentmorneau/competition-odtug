@@ -5,7 +5,7 @@ const
 var app = express();
 
 app.get('/', function(req, res, next){
-  res.redirect('/pls/apex/f?p=16557:1');
+  res.redirect('/pls/apex/f?p=12192:1');
 });
 
 app.use('**', proxy(
