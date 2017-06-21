@@ -23,10 +23,11 @@ app.use(['/i', '/pls/apex'], proxy(
   {
     target: targetUrl,
     changeOrigin: true,
+    autoRewrite: true,
+    xfwd: true,
+    protocolRewrite: sslEnabled ? 'https' : 'http',
     onProxyReq: function(proxyReq, req, res) {
-      if (!req.connection.encrypted && req.headers.origin){
-        proxyReq.setHeader('origin', targetUrl);
-      }
+      proxyReq.setHeader('origin', targetUrl);
     },
     onProxyRes: function(proxyRes, req, res) {
       if (!req.connection.encrypted && proxyRes.headers['set-cookie']) {
